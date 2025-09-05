@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:islami_app/ui/Animations/quran_page.dart';
 import 'package:islami_app/ui/QuranPage/sura_content.dart';
 import 'package:islami_app/ui/QuranPage/sura_details.dart';
 import 'package:islami_app/ui/QuranPage/suracontent1/suracontent1.dart';
@@ -8,56 +9,6 @@ import 'package:islami_app/utils/app_image.dart';
 import 'package:islami_app/utils/app_routes.dart';
 import 'package:islami_app/utils/app_style.dart';
 import 'package:islami_app/utils/quran_resources%20.dart';
-
-
-class SlidePageRoute<T> extends PageRouteBuilder<T> {
-  final Widget child;
-  final AxisDirection direction;
-  final int index;
-
-  SlidePageRoute({
-    required this.child,
-    required this.index,
-    this.direction = AxisDirection.left,
-  }) : super(
-          settings: RouteSettings(arguments: index),
-          transitionDuration: Duration(milliseconds: 300),
-          reverseTransitionDuration: Duration(milliseconds: 300),
-          pageBuilder: (context, animation, secondaryAnimation) => child,
-        );
-
-  @override
-  Widget buildTransitions(BuildContext context, Animation<double> animation,
-      Animation<double> secondaryAnimation, Widget child) {
-    
-    Offset begin;
-    Offset end = Offset.zero;
-    
-    switch (direction) {
-      case AxisDirection.right:
-        begin = Offset(-1.0, 0.0);
-        break;
-      case AxisDirection.left:
-        begin = Offset(1.0, 0.0);
-        break;
-      case AxisDirection.up:
-        begin = Offset(0.0, 1.0);
-        break;
-      case AxisDirection.down:
-        begin = Offset(0.0, -1.0);
-        break;
-    }
-
-    var curve = Curves.easeInOutCubic;
-    var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-    var offsetAnimation = animation.drive(tween);
-
-    return SlideTransition(
-      position: offsetAnimation,
-      child: child,
-    );
-  }
-}
 
 class SuraDetails1 extends StatefulWidget {
   const SuraDetails1({super.key});
@@ -151,7 +102,7 @@ class _SuraDetailsState extends State<SuraDetails1> {
       String fileContent =
           await rootBundle.loadString("assets/Suras/${index + 1}.txt");
       List<String> suraContent = fileContent.split("\n");
-      
+
       List<String> processedContent = [];
       for (int i = 0; i < suraContent.length; i++) {
         String verse = suraContent[i].trim();
@@ -159,7 +110,7 @@ class _SuraDetailsState extends State<SuraDetails1> {
           processedContent.add("$verse [${processedContent.length + 1}]");
         }
       }
-      
+
       suraFile = processedContent.join(" ");
       setState(() {});
     } catch (e) {
