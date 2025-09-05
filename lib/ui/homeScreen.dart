@@ -214,11 +214,11 @@ class _HomescreenState extends State<Homescreen> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Text(
-                      "${QuranResources.englishQuranSurahs[index]}",
+                      QuranResources.englishQuranSurahs[index],
                       style: AppStyle.bold24Black,
                     ),
                     Text(
-                      "${QuranResources.arabicAuranSuras[index]}",
+                      QuranResources.arabicAuranSuras[index],
                       style: AppStyle.bold24Black,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -289,7 +289,7 @@ class _HomescreenState extends State<Homescreen> {
         ],
       ),
       title: Text(
-        "${QuranResources.englishQuranSurahs[index]}",
+        QuranResources.englishQuranSurahs[index],
         style: TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.w600,
@@ -303,7 +303,7 @@ class _HomescreenState extends State<Homescreen> {
         ),
       ),
       trailing: Text(
-        "${QuranResources.arabicAuranSuras[index]}",
+        QuranResources.arabicAuranSuras[index],
         style: TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.w600,
