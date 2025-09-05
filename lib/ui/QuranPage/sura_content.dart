@@ -6,7 +6,7 @@ class SuraContent extends StatelessWidget {
   final String content;
   final int index;
 
-  SuraContent({super.key, required this.content, required this.index});
+  const SuraContent({super.key, required this.content, required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class SuraContent extends StatelessWidget {
             borderRadius: BorderRadius.circular(15),
             border: Border.all(color: AppColor.primaryColor)),
         child: Text(
-          '${content}[${index + 1}]',
+          '$content[${index + 1}]',
           style: AppStyle.bold20Primary,
           textDirection: TextDirection.rtl,
           textAlign: TextAlign.center,

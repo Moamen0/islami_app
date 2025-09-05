@@ -20,7 +20,7 @@ class Screentwo extends StatelessWidget {
             height: 171,
             width: 291,
           ),
-          Container(
+          SizedBox(
             height: 415,
             width: 358,
             child: Image.asset(

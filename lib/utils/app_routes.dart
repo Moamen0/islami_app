@@ -1,4 +1,3 @@
-import 'package:islami_app/ui/homeScreen.dart';
 
 class AppRoutes {
   static const String homeRouteName = "Homescreen";

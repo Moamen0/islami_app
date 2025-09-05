@@ -18,7 +18,7 @@ class IntroductionScreen extends StatefulWidget {
 }
 
 class _IntroductionScreenState extends State<IntroductionScreen> {
-  PageController _pageController = PageController();
+  final PageController _pageController = PageController();
   String buttonNext = "Next";
   int currentPageIndex = 0;
 

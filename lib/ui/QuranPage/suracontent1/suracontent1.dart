@@ -5,7 +5,7 @@ import 'package:islami_app/utils/app_style.dart';
 class SuraContent1 extends StatelessWidget {
   final String content;
 
-  SuraContent1({
+  const SuraContent1({
     super.key,
     required this.content,
   });

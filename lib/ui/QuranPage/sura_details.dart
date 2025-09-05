@@ -57,7 +57,7 @@ class SlidePageRoute<T> extends PageRouteBuilder<T> {
 }
 
 class SuraDetails extends StatefulWidget {
-  SuraDetails({super.key});
+  const SuraDetails({super.key});
 
   @override
   State<SuraDetails> createState() => _SuraDetailsState();
