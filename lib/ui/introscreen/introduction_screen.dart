@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:islami_app/ui/homeScreen.dart';
 import 'package:islami_app/ui/introscreen/screenFive.dart';
 import 'package:islami_app/ui/introscreen/screenfour.dart';
 import 'package:islami_app/ui/introscreen/screenone.dart';
@@ -24,6 +22,8 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Stack(
         children: [
@@ -65,18 +65,17 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                           style: TextStyle(color: AppColor.primaryColor),
                         ),
                       )
-                    : SizedBox(width: 50),
+                    : SizedBox(width: width * 0.07),
                 SmoothPageIndicator(
                   controller: _pageController,
                   count: 5,
                   effect: WormEffect(
                     dotColor: Colors.grey,
                     activeDotColor: AppColor.primaryColor,
-                    dotHeight: 8,
-                    dotWidth: 8,
+                    dotHeight: height * 0.01,
+                    dotWidth: width * 0.02,
                   ),
                 ),
-
                 InkWell(
                   onTap: () {
                     if (currentPageIndex == 4) {

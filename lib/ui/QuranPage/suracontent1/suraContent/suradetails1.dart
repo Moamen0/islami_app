@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:islami_app/ui/Animations/quran_page.dart';
-import 'package:islami_app/ui/QuranPage/sura_content.dart';
 import 'package:islami_app/ui/QuranPage/sura_details.dart';
 import 'package:islami_app/ui/QuranPage/suracontent1/suraContent/suracontent1.dart';
 import 'package:islami_app/utils/app_color.dart';
 import 'package:islami_app/utils/app_image.dart';
-import 'package:islami_app/utils/app_routes.dart';
 import 'package:islami_app/utils/app_style.dart';
 import 'package:islami_app/utils/quran_resources%20.dart';
 import 'package:islami_app/utils/shared_pref.dart'; // Add this import
