@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:islami_app/ui/homeScreen.dart';
 import 'package:islami_app/ui/introscreen/introduction_screen.dart';
 import 'package:islami_app/ui/QuranPage/sura_details.dart';
-import 'package:islami_app/ui/QuranPage/suracontent1/suradetails1.dart';
+import 'package:islami_app/ui/QuranPage/suracontent1/suraContent/suradetails1.dart';
 import 'package:islami_app/utils/app_color.dart';
 import 'package:islami_app/utils/app_routes.dart';
 
