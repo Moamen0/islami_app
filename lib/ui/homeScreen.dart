@@ -5,10 +5,6 @@ import 'package:islami_app/ui/Sebha/SebhaScreen.dart';
 import 'package:islami_app/ui/TimeScreen/TimeScreen.dart';
 import 'package:islami_app/utils/app_color.dart';
 import 'package:islami_app/utils/app_image.dart';
-import 'package:islami_app/utils/app_routes.dart';
-import 'package:islami_app/utils/app_style.dart';
-import 'package:islami_app/utils/quran_resources%20.dart';
-import 'package:islami_app/utils/shared_pref.dart';
 import 'Hadeeth/HadethScreen.dart';
 
 class Homescreen extends StatefulWidget {

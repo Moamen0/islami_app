@@ -7,7 +7,7 @@ import 'package:islami_app/utils/quran_resources%20.dart';
 import 'package:islami_app/utils/shared_pref.dart';
 
 class buildQuranScreen extends StatefulWidget {
-  buildQuranScreen({super.key});
+  const buildQuranScreen({super.key});
 
   @override
   State<buildQuranScreen> createState() => _buildQuranScreenState();

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:islami_app/utils/app_color.dart';
 
 class buildRadioScreen extends StatefulWidget {
-  buildRadioScreen({super.key});
+  const buildRadioScreen({super.key});
 
   @override
   State<buildRadioScreen> createState() => _buildRadioScreenState();
