@@ -3,12 +3,13 @@ import 'package:flutter/services.dart';
 import 'package:islami_app/ui/Animations/quran_page.dart';
 import 'package:islami_app/ui/QuranPage/sura_content.dart';
 import 'package:islami_app/ui/QuranPage/sura_details.dart';
-import 'package:islami_app/ui/QuranPage/suracontent1/suracontent1.dart';
+import 'package:islami_app/ui/QuranPage/suracontent1/suraContent/suracontent1.dart';
 import 'package:islami_app/utils/app_color.dart';
 import 'package:islami_app/utils/app_image.dart';
 import 'package:islami_app/utils/app_routes.dart';
 import 'package:islami_app/utils/app_style.dart';
 import 'package:islami_app/utils/quran_resources%20.dart';
+import 'package:islami_app/utils/shared_pref.dart'; // Add this import
 
 class SuraDetails1 extends StatefulWidget {
   const SuraDetails1({super.key});
@@ -25,9 +26,13 @@ class _SuraDetailsState extends State<SuraDetails1> {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     int index = ModalRoute.of(context)!.settings.arguments as int;
+
     if (suraFile.isEmpty) {
       loadFileSuras(index);
+      // Save this sura as recently read when the details screen is opened
+      _saveSuraAsRecent(index);
     }
+
     return Scaffold(
       appBar: AppBar(
         surfaceTintColor: Colors.transparent,
@@ -117,5 +122,10 @@ class _SuraDetailsState extends State<SuraDetails1> {
       print("Error loading sura file: $e");
       setState(() {});
     }
+  }
+
+  // Add this method to save sura as recently read
+  Future<void> _saveSuraAsRecent(int index) async {
+    await PrefsManger.addSuraIndex(index);
   }
 }

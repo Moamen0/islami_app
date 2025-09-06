@@ -4,6 +4,7 @@ import 'package:islami_app/utils/app_image.dart';
 import 'package:islami_app/utils/app_routes.dart';
 import 'package:islami_app/utils/app_style.dart';
 import 'package:islami_app/utils/quran_resources%20.dart';
+import 'package:islami_app/utils/shared_pref.dart';
 
 class Homescreen extends StatefulWidget {
   const Homescreen({super.key});
@@ -18,6 +19,7 @@ class _HomescreenState extends State<Homescreen> {
   String currentTasbih = 'سبحان الله';
   int tasbihIndex = 0;
   bool isPlaying = false;
+  List<int> recentSuras = []; 
 
   final List<String> tasbihList = [
     'سبحان الله',
@@ -32,19 +34,6 @@ class _HomescreenState extends State<Homescreen> {
     AppImage.sebhabg,
     AppImage.radiobg,
     AppImage.timebg
-  ];
-
-  final List<String> surahNames = [
-    'الفاتحة',
-    'البقرة',
-    'آل عمران',
-    'النساء',
-    'المائدة',
-    'الأنعام',
-    'الأعراف',
-    'الأنفال',
-    'التوبة',
-    'يونس'
   ];
 
   final List<int> ayahCounts = [7, 286, 200, 176, 120, 165, 206, 75, 129, 109];
@@ -69,6 +58,19 @@ class _HomescreenState extends State<Homescreen> {
     {'name': 'العشاء', 'time': '8:00'},
   ];
 
+  @override
+  void initState() {
+    super.initState();
+    _loadRecentSuras(); // Load recent suras when the screen initializes
+  }
+
+  Future<void> _loadRecentSuras() async {
+    List<int> recent = await PrefsManger.getMostRecentSuras();
+    setState(() {
+      recentSuras = recent;
+    });
+  }
+
   void _onNavBarTap(int index) {
     if (selectedindex != index) {
       setState(() {
@@ -76,12 +78,6 @@ class _HomescreenState extends State<Homescreen> {
       });
     }
   }
-
-  
-
-  
-
-  
 
   void _toggleRadio() {
     setState(() {
@@ -99,7 +95,6 @@ class _HomescreenState extends State<Homescreen> {
             fit: BoxFit.cover,
           ),
         ),
-        // Main Scaffold
         Scaffold(
           backgroundColor: Colors.transparent,
           body: Padding(
@@ -182,10 +177,8 @@ class _HomescreenState extends State<Homescreen> {
           "Most Recently",
           style: AppStyle.bold16White,
         ),
-        SizedBox(height: 150, child: _buildMostRecntlyCard()),
-        SizedBox(
-          height: 10,
-        ),
+        SizedBox(height: 150, child: _buildMostRecentlyCard()),
+        SizedBox(height: 10),
         Text(
           "Sura List",
           style: AppStyle.bold16White,
@@ -195,47 +188,65 @@ class _HomescreenState extends State<Homescreen> {
     );
   }
 
-  Widget _buildMostRecntlyCard() {
+  Widget _buildMostRecentlyCard() {
+    List<int> displaySuras = recentSuras.isEmpty 
+        ? List.generate(10, (index) => index) 
+        : recentSuras;
+
     return ListView.separated(
       scrollDirection: Axis.horizontal,
       itemBuilder: (context, index) {
-        return Container(
-          width: 280,
-          padding: const EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            color: AppColor.primaryColor,
-          ),
-          child: Row(
-            children: [
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Text(
-                      QuranResources.englishQuranSurahs[index],
-                      style: AppStyle.bold24Black,
-                    ),
-                    Text(
-                      QuranResources.arabicAuranSuras[index],
-                      style: AppStyle.bold24Black,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    Text(
-                      "Verses ${QuranResources.AyaNumber[index]}",
-                      style: AppStyle.bold14Black,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ],
+        int suraIndex = displaySuras[index];
+        return GestureDetector(
+          onTap: () async {
+            await PrefsManger.addSuraIndex(suraIndex);
+            await _loadRecentSuras(); 
+            
+            if (mounted) {
+              Navigator.of(context).pushNamed(
+                AppRoutes.suraDetailsRouteName1,
+                arguments: suraIndex,
+              );
+            }
+          },
+          child: Container(
+            width: 280,
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              color: AppColor.primaryColor,
+            ),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Text(
+                        QuranResources.englishQuranSurahs[suraIndex],
+                        style: AppStyle.bold24Black,
+                      ),
+                      Text(
+                        QuranResources.arabicAuranSuras[suraIndex],
+                        style: AppStyle.bold24Black,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      Text(
+                        "Verses ${QuranResources.AyaNumber[suraIndex]}",
+                        style: AppStyle.bold14Black,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              Image.asset(AppImage.mostRecentlycard),
-            ],
+                Image.asset(AppImage.mostRecentlycard),
+              ],
+            ),
           ),
         );
       },
-      itemCount: 10,
+      itemCount: displaySuras.length > 10 ? 10 : displaySuras.length,
       separatorBuilder: (context, index) => const SizedBox(width: 10),
     );
   }
@@ -252,15 +263,11 @@ class _HomescreenState extends State<Homescreen> {
         hintText: "Sura Name",
         hintStyle: AppStyle.bold16White,
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(
-            16,
-          ),
+          borderRadius: BorderRadius.circular(16),
           borderSide: BorderSide(color: AppColor.primaryColor),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(
-            16,
-          ),
+          borderRadius: BorderRadius.circular(16),
           borderSide: BorderSide(color: AppColor.primaryColor),
         ),
       ),
@@ -310,15 +317,21 @@ class _HomescreenState extends State<Homescreen> {
           color: AppColor.whiteColor,
         ),
       ),
-      onTap: () {
-        Navigator.of(context).pushNamed(
-          AppRoutes.suraDetailsRouteName1,
-          arguments: index,
-        );
+      onTap: () async {
+        await PrefsManger.addSuraIndex(index);
+        await _loadRecentSuras(); 
+        
+        if (mounted) {
+          Navigator.of(context).pushNamed(
+            AppRoutes.suraDetailsRouteName1,
+            arguments: index,
+          );
+        }
       },
     );
   }
 
+  
   Widget _buildHadethScreen() {
     return ListView.separated(
       padding: const EdgeInsets.all(16),
@@ -482,7 +495,6 @@ class _HomescreenState extends State<Homescreen> {
               ),
             ),
             const SizedBox(height: 30),
-            // Status
             Text(
               isPlaying ? 'جاري التشغيل...' : 'متوقف',
               style: TextStyle(
@@ -501,7 +513,6 @@ class _HomescreenState extends State<Homescreen> {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 30),
-            // Control Buttons
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -582,7 +593,6 @@ class _HomescreenState extends State<Homescreen> {
                 ),
               ),
               const SizedBox(height: 15),
-              // Current Date
               Text(
                 'السبت، 30 أغسطس 2025',
                 style: TextStyle(
@@ -591,10 +601,8 @@ class _HomescreenState extends State<Homescreen> {
                 ),
               ),
               const SizedBox(height: 20),
-              // Next Prayer Info
               _buildNextPrayerCard(),
               const SizedBox(height: 20),
-              // Prayer Times List
               Column(
                 children: prayerTimes
                     .map((prayer) =>
