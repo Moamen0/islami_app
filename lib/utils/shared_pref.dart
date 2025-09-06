@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class PrefsManger {
   static const String _mostRecentSuraKey = "most_recent_sura_indices";
-  static const int _maxRecentSuras = 10; // Limit to 10 most recent suras
+  static const int _maxRecentSuras = 10; 
 
   static Future<void> addSuraIndex(int suraIndex) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
