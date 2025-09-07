@@ -31,23 +31,26 @@ class _buildQuranScreenState extends State<buildQuranScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        _buildRecentlyReadCard(),
-        const SizedBox(height: 20),
-        Text(
-          "Most Recently",
-          style: AppStyle.bold16White,
-        ),
-        SizedBox(height: 150, child: _buildMostRecentlyCard()),
-        SizedBox(height: 10),
-        Text(
-          "Sura List",
-          style: AppStyle.bold16White,
-        ),
-        Expanded(child: _buildSurahsList()),
-      ],
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          _buildRecentlyReadCard(),
+          const SizedBox(height: 20),
+          Text(
+            "Most Recently",
+            style: AppStyle.bold16White,
+          ),
+          SizedBox(height: 150, child: _buildMostRecentlyCard()),
+          SizedBox(height: 10),
+          Text(
+            "Sura List",
+            style: AppStyle.bold16White,
+          ),
+          Expanded(child: _buildSurahsList()),
+        ],
+      ),
     );
   }
 

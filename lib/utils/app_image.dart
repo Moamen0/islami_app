@@ -14,4 +14,8 @@ class AppImage {
   static const String mostRecentlycard = 'assets/images/mostimage.png';
   static const String suraicon = 'assets/images/suraicon.png';
   static const String surabg = 'assets/images/surabg.png';
+  static const String patternLift = 'assets/images/left_corner.png';
+  static const String patternRight = 'assets/images/right_corner.png';
+  static const String patternbottom = 'assets/images/Mosque.png';
+  static const String hadeethbg = 'assets/images/Hadithbg.png';
 }

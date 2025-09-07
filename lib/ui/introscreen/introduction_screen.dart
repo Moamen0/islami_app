@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:islami_app/ui/introscreen/screenFive.dart';
 import 'package:islami_app/ui/introscreen/screenfour.dart';
 import 'package:islami_app/ui/introscreen/screenone.dart';
@@ -13,6 +14,7 @@ class IntroductionScreen extends StatefulWidget {
 
   @override
   State<IntroductionScreen> createState() => _IntroductionScreenState();
+  
 }
 
 class _IntroductionScreenState extends State<IntroductionScreen> {
@@ -25,6 +27,7 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     return Scaffold(
+      
       body: Stack(
         children: [
           PageView(

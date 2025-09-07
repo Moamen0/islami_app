@@ -20,8 +20,6 @@ class _HomescreenState extends State<Homescreen> {
   bool isPlaying = false;
   List<int> recentSuras = [];
 
-
-
   final List<String> backGroundImages = [
     AppImage.quranbg,
     AppImage.hadethbg,
@@ -31,8 +29,6 @@ class _HomescreenState extends State<Homescreen> {
   ];
 
   final List<int> ayahCounts = [7, 286, 200, 176, 120, 165, 206, 75, 129, 109];
-
- 
 
   void _onNavBarTap(int index) {
     if (selectedindex != index) {
@@ -60,10 +56,7 @@ class _HomescreenState extends State<Homescreen> {
               children: [
                 Image.asset(AppImage.logo),
                 Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: _buildScreenContent(),
-                  ),
+                  child: _buildScreenContent(),
                 ),
               ],
             ),
