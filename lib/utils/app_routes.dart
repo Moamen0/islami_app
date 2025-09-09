@@ -4,4 +4,5 @@ class AppRoutes {
   static const String introRouteName = "Introscreen";
   static const String suraDetailsRouteName = "SuraDetails";
   static const String suraDetailsRouteName1 = "SuraDetails1";
+  static const String hadeethDetails = "HadethDetails1";
 }

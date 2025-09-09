@@ -7,7 +7,7 @@ import 'package:islami_app/utils/app_color.dart';
 import 'package:islami_app/utils/app_image.dart';
 import 'package:islami_app/utils/app_style.dart';
 import 'package:islami_app/utils/quran_resources%20.dart';
-import 'package:islami_app/utils/shared_pref.dart'; // Add this import
+import 'package:islami_app/utils/shared_pref.dart'; 
 
 class SuraDetails1 extends StatefulWidget {
   const SuraDetails1({super.key});
@@ -27,7 +27,6 @@ class _SuraDetailsState extends State<SuraDetails1> {
 
     if (suraFile.isEmpty) {
       loadFileSuras(index);
-      // Save this sura as recently read when the details screen is opened
       _saveSuraAsRecent(index);
     }
 
@@ -122,7 +121,6 @@ class _SuraDetailsState extends State<SuraDetails1> {
     }
   }
 
-  // Add this method to save sura as recently read
   Future<void> _saveSuraAsRecent(int index) async {
     await PrefsManger.addSuraIndex(index);
   }

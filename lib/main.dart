@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:islami_app/ui/Hadeeth/Hadeeth_Details.dart';
 import 'package:islami_app/ui/homeScreen.dart';
 import 'package:islami_app/ui/introscreen/introduction_screen.dart';
 import 'package:islami_app/ui/QuranPage/sura_details.dart';
@@ -28,6 +29,7 @@ class Islami extends StatelessWidget {
         AppRoutes.introRouteName: (context) => IntroductionScreen(),
         AppRoutes.suraDetailsRouteName: (context) => SuraDetails(),
         AppRoutes.suraDetailsRouteName1: (context) => SuraDetails1(),
+        AppRoutes.hadeethDetails: (context) => HadeethDetails(),
       },
     );
   }
