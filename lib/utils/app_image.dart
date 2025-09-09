@@ -10,7 +10,7 @@ class AppImage {
   static const String timebg = 'assets/images/timebg.png';
   static const String quranbg = 'assets/images/Background1.png';
   static const String logo = 'assets/images/toplogo.png';
-  static const String sebhalogo = 'assets/images/sebhalogo.png';
+  static const String sebhalogo = 'assets/images/sebha.svg';
   static const String mostRecentlycard = 'assets/images/mostimage.png';
   static const String suraicon = 'assets/images/suraicon.png';
   static const String surabg = 'assets/images/surabg.png';

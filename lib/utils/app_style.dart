@@ -22,6 +22,11 @@ class AppStyle {
       fontSize: 24,
       fontWeight: FontWeight.bold,
       fontFamily: "Tajawal");
+  static const TextStyle bold35White = TextStyle(
+      color: AppColor.whiteColor,
+      fontSize: 35,
+      fontWeight: FontWeight.bold,
+      fontFamily: "Tajawal");
   static const TextStyle bold20Primary = TextStyle(
       color: AppColor.primaryColor,
       fontSize: 20,
