@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:islami_app/ui/introscreen/screenFive.dart';
 import 'package:islami_app/ui/introscreen/screenfour.dart';
 import 'package:islami_app/ui/introscreen/screenone.dart';

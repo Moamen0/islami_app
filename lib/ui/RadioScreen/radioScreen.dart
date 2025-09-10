@@ -1,131 +1,158 @@
 import 'package:flutter/material.dart';
+import 'package:islami_app/ui/RadioScreen/Radio%20Tab/Radio_model.dart';
+import 'package:islami_app/ui/RadioScreen/Radio%20Tab/Radio_tab.dart';
+import 'package:islami_app/ui/RadioScreen/Reciters/RecitersStationCaed.dart';
+import 'package:islami_app/ui/RadioScreen/Reciters/Reciters_model.dart';
 import 'package:islami_app/utils/app_color.dart';
 
-class buildRadioScreen extends StatefulWidget {
-  const buildRadioScreen({super.key});
+class BuildRadioScreen extends StatefulWidget {
+  const BuildRadioScreen({super.key});
 
   @override
-  State<buildRadioScreen> createState() => _buildRadioScreenState();
+  State<BuildRadioScreen> createState() => _BuildRadioScreenState();
 }
 
-class _buildRadioScreenState extends State<buildRadioScreen> {
+class _BuildRadioScreenState extends State<BuildRadioScreen>
+    with SingleTickerProviderStateMixin {
+  late TabController tabController;
+  int currentPlayingIndex = -1;
   bool isPlaying = false;
+
+  int currentTab = 0;
+
+  final List<RadioStation> radioStations = [
+    RadioStation("Radio Ibrahim Al-Akdar", true),
+    RadioStation("Radio Al-Qaria Yassen", false),
+    RadioStation("Radio Ahmed Al-trabulsi", false),
+    RadioStation("Radio Addokali Mohammad Alalim", false),
+  ];
+
+  final List<RecitersModel> recitersStations = [
+    RecitersModel("Ibrahim Al-Akdar", true),
+    RecitersModel("Al-Qaria Yassen", false),
+    RecitersModel("Ahmed Al-trabulsi", false),
+    RecitersModel("Addokali Mohammad Alalim", false),
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    tabController = TabController(length: 2, vsync: this);
+
+    tabController.addListener(() {
+      if (!tabController.indexIsChanging) {
+        setState(() {
+          currentTab = tabController.index;
+          currentPlayingIndex = -1;
+          isPlaying = false;
+        });
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    tabController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        width: double.infinity,
-        margin: const EdgeInsets.symmetric(horizontal: 30),
-        padding: const EdgeInsets.all(30),
-        decoration: BoxDecoration(
-          color: AppColor.whiteColor.withOpacity(0.95),
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.1),
-              blurRadius: 15,
-              spreadRadius: 3,
-            ),
-          ],
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              'إذاعة القرآن الكريم',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
+    return Container(
+      child: Column(
+        children: [
+          Container(
+            child: TabBar(
+              dividerColor: Colors.transparent,
+              indicator: BoxDecoration(
                 color: AppColor.primaryColor,
+                borderRadius: BorderRadius.circular(16),
               ),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 30),
-            Container(
-              width: 120,
-              height: 120,
-              decoration: BoxDecoration(
-                color: AppColor.primaryColor.withOpacity(0.1),
-                shape: BoxShape.circle,
-              ),
-              child: Icon(
-                Icons.radio,
-                color: AppColor.primaryColor,
-                size: 60,
-              ),
-            ),
-            const SizedBox(height: 30),
-            Text(
-              isPlaying ? 'جاري التشغيل...' : 'متوقف',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
-                color: AppColor.blackColor,
-              ),
-            ),
-            const SizedBox(height: 8),
-            Text(
-              'إذاعة القرآن الكريم من القاهرة',
-              style: TextStyle(
-                fontSize: 14,
-                color: AppColor.blackColor.withOpacity(0.7),
-              ),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 30),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                _buildRadioButton(Icons.skip_previous, () {}),
-                _buildRadioButton(
-                  isPlaying ? Icons.pause : Icons.play_arrow,
-                  _toggleRadio,
-                  isPrimary: true,
+              controller: tabController,
+              labelColor: Colors.black,
+              unselectedLabelColor: Colors.white,
+              tabs: [
+                Tab(
+                  child: Container(
+                    padding: EdgeInsets.symmetric(vertical: 12, horizontal: 50),
+                    child: Text(
+                      "Radio",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
                 ),
-                _buildRadioButton(Icons.skip_next, () {}),
+                Tab(
+                  child: Container(
+                    padding: EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+                    child: Text(
+                      "Reciters",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildRadioButton(IconData icon, VoidCallback onTap,
-      {bool isPrimary = false}) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        width: isPrimary ? 70 : 50,
-        height: isPrimary ? 70 : 50,
-        decoration: BoxDecoration(
-          color: isPrimary
-              ? AppColor.primaryColor
-              : AppColor.primaryColor.withOpacity(0.1),
-          shape: BoxShape.circle,
-          boxShadow: isPrimary
-              ? [
-                  BoxShadow(
-                    color: AppColor.primaryColor.withOpacity(0.3),
-                    blurRadius: 10,
-                    spreadRadius: 2,
+          ),
+          Expanded(
+            child: TabBarView(
+              controller: tabController,
+              children: [
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  child: ListView.separated(
+                    padding: EdgeInsets.only(top: 10),
+                    itemBuilder: (context, index) {
+                      return RadioStationCard(
+                        station: radioStations[index],
+                        isPlaying: currentTab == 0 &&
+                            currentPlayingIndex == index &&
+                            isPlaying,
+                        onPlayPressed: () => _togglePlay(index),
+                      );
+                    },
+                    separatorBuilder: (context, index) => SizedBox(height: 16),
+                    itemCount: radioStations.length,
                   ),
-                ]
-              : null,
-        ),
-        child: Icon(
-          icon,
-          color: isPrimary ? AppColor.whiteColor : AppColor.primaryColor,
-          size: isPrimary ? 35 : 25,
-        ),
+                ),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  child: ListView.separated(
+                    padding: EdgeInsets.only(top: 10),
+                    itemBuilder: (context, index) {
+                      return RecitersStationCard(
+                        station: recitersStations[index],
+                        isPlaying: currentTab == 1 &&
+                            currentPlayingIndex == index &&
+                            isPlaying,
+                        onPlayPressed: () => _togglePlay(index),
+                      );
+                    },
+                    separatorBuilder: (context, index) => SizedBox(height: 16),
+                    itemCount: recitersStations.length,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
 
-  void _toggleRadio() {
+  void _togglePlay(int index) {
     setState(() {
-      isPlaying = !isPlaying;
+      if (currentPlayingIndex == index && isPlaying) {
+        isPlaying = false;
+      } else {
+        currentPlayingIndex = index;
+        isPlaying = true;
+      }
     });
   }
 }

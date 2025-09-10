@@ -18,4 +18,7 @@ class AppImage {
   static const String patternRight = 'assets/images/right_corner.png';
   static const String patternbottom = 'assets/images/Mosque.png';
   static const String hadeethbg = 'assets/images/Hadithbg.png';
+  static const String evnAzkar = 'assets/images/bell.png';
+  static const String mrnAzkar = 'assets/images/azkar.png';
+  static const String timePrayTime = 'assets/images/time screen.png';
 }

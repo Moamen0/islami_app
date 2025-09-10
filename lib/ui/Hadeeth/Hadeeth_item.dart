@@ -7,7 +7,7 @@ import 'package:islami_app/utils/app_style.dart';
 import 'package:islami_app/utils/app_routes.dart';
 
 class HadeethItem extends StatefulWidget {
-  HadeethItem({super.key, required this.index});
+  const HadeethItem({super.key, required this.index});
   final int index;
 
   @override

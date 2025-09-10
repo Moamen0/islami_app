@@ -41,6 +41,7 @@ dependencies:
   google_fonts: ^6.3.0
   shared_preferences: ^2.5.3
   carousel_slider: ^5.1.1
+  flutter_custom_clippers: ^2.1.0
 
 dev_dependencies:
   flutter_test:
