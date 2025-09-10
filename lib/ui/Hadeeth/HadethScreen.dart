@@ -8,7 +8,7 @@ import 'package:islami_app/utils/app_routes.dart';
 import 'package:islami_app/utils/app_style.dart';
 
 class buildHadethScreen extends StatelessWidget {
-  buildHadethScreen({super.key});
+  const buildHadethScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

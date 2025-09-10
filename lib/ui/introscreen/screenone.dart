@@ -3,7 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:islami_app/utils/app_color.dart';
 
 class Screenone extends StatelessWidget {
-  Screenone({super.key});
+  const Screenone({super.key});
 
   @override
   Widget build(BuildContext context) {

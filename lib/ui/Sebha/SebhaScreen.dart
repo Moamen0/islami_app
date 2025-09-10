@@ -5,7 +5,7 @@ import 'package:islami_app/utils/app_image.dart';
 import 'package:islami_app/utils/app_style.dart';
 
 class buildSebhaScreen extends StatefulWidget {
-  buildSebhaScreen({super.key});
+  const buildSebhaScreen({super.key});
 
   @override
   State<buildSebhaScreen> createState() => _buildSebhaScreenState();
