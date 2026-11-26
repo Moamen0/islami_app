@@ -1,16 +1,27 @@
-# islami_app
+# Islami App
 
-A new Flutter project.
+A Flutter Islamic app with an Arabic interface.
 
-## Getting Started
+## Features
+- Intro screens
+- Quran: suras list and sura details
+- Hadeeth: list and details
+- Sebha (tasbeeh counter)
+- Radio: radio tab and reciters
+- Time tab
+- Content stored locally in assets (Suras and Hadeeth text files)
 
-This project is a starting point for a Flutter application.
+## Tech stack
+Flutter, Dart, shared_preferences, google_fonts, flutter_svg, introduction_screen, carousel_slider, smooth_page_indicator
 
-A few resources to get you started if this is your first Flutter project:
+## Run
+```bash
+flutter pub get
+flutter run
+```
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Screenshots
+<!-- Add real screenshots here -->
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Author
+Moamen Abdallah, https://github.com/Moamen0
